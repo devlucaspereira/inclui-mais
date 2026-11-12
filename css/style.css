@@ -1,6 +1,6 @@
-
 /* =========================================
    INCLUI+ | ESTILOS GLOBAIS
+   Versão consolidada
    ========================================= */
 
 /* 1. FONTES */
@@ -39,7 +39,6 @@
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 16px;
-
     --shadow-card: 0 2px 10px rgba(22, 58, 74, 0.06);
 
     /* Layout */
@@ -59,16 +58,22 @@ html {
 }
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: var(--font-primary);
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.6;
-    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 img {
-    max-width: 100%;
     display: block;
+    max-width: 100%;
 }
 
 a {
@@ -98,10 +103,10 @@ button {
     top: -100px;
     left: 16px;
     z-index: 1000;
-    background-color: var(--color-primary);
-    color: var(--color-white);
     padding: 12px 16px;
     border-radius: var(--radius-sm);
+    background-color: var(--color-primary);
+    color: var(--color-white);
 }
 
 .skip-link:focus {
@@ -148,6 +153,8 @@ p {
 
 /* 7. CABEÇALHO */
 .site-header {
+    position: relative;
+    z-index: 5;
     width: 100%;
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border);
@@ -161,10 +168,26 @@ p {
     gap: var(--spacing-md);
 }
 
-.logo {
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     color: var(--color-primary);
     font-size: 1.8rem;
     font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.brand-logo img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.brand-plus {
+    color: var(--color-accent);
 }
 
 .main-nav {
@@ -223,9 +246,9 @@ p {
 }
 
 .btn-text {
+    padding-inline: 8px;
     background: transparent;
     color: var(--color-secondary);
-    padding-inline: 8px;
 }
 
 .btn-text:hover {
@@ -234,24 +257,26 @@ p {
 
 /* 9. CARDS */
 .card {
+    padding: var(--spacing-md);
     background-color: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-md);
     box-shadow: var(--shadow-card);
 }
 
-.card-hover {
+.card-hover,
+.benefit-card {
     transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
-.card-hover:hover {
-    transform: translateY(-3px);
+.card-hover:hover,
+.benefit-card:hover {
+    transform: translateY(-4px);
     border-color: var(--color-secondary);
-    box-shadow: 0 5px 16px rgba(22, 58, 74, 0.10);
+    box-shadow: 0 8px 20px rgba(22, 58, 74, 0.11);
 }
 
 /* 10. FORMULÁRIOS */
@@ -287,16 +312,16 @@ p {
 
 /* 11. RODAPÉ */
 .site-footer {
+    padding: 28px 0 18px;
     background-color: var(--color-primary);
     color: var(--color-white);
-    padding: var(--spacing-xl) 0;
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: var(--spacing-lg);
+    gap: 28px;
     flex-wrap: wrap;
 }
 
@@ -306,24 +331,46 @@ p {
     color: var(--color-white);
 }
 
+.footer-brand .brand-logo {
+    margin-bottom: 7px;
+    color: var(--color-white);
+}
+
+.footer-brand .brand-logo .brand-plus {
+    color: #58C69B;
+}
+
+.footer-brand .brand-logo img {
+    width: 38px;
+    height: 38px;
+}
+
+.footer-brand > p {
+    font-size: 0.9rem;
+}
+
 .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
 }
 
 .footer-links a:hover {
     text-decoration: underline;
 }
 
+.footer-description {
+    max-width: 340px;
+}
+
 .footer-bottom {
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-md);
+    margin-top: 20px;
+    padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 0.875rem;
 }
 
-/* 12. SEÇÕES */
+/* 12. SEÇÕES GERAIS */
 .section {
     padding-block: var(--spacing-xl);
 }
@@ -337,74 +384,59 @@ p {
     color: var(--color-text-secondary);
 }
 
-/* 13. RESPONSIVIDADE */
-@media (max-width: 768px) {
-    .container {
-        width: min(100% - 32px, var(--container-width));
-    }
-
-    .header-content {
-        flex-wrap: wrap;
-        padding-block: 16px;
-    }
-
-    .main-nav {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 16px;
-    }
-
-    .footer-content {
-        flex-direction: column;
-    }
-
-    .section {
-        padding-block: var(--spacing-lg);
-    }
-}
-
-/* 14. MOVIMENTOS REDUZIDOS */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-    }
-}
-
-
 /* =========================================
-   INCLUI+ | PÁGINA INICIAL
+   13. PÁGINA INICIAL | LANDING PAGE
    ========================================= */
 
-/* 1. HERO */
+/* Área principal */
 .hero {
-    background:
-        linear-gradient(110deg, #F8FAFB 50%, #EAF3F3 100%);
+    position: relative;
+    isolation: isolate;
     overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 8% 12%,
+            rgba(31, 111, 139, 0.10),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 92% 82%,
+            rgba(33, 140, 104, 0.09),
+            transparent 30%
+        ),
+        linear-gradient(110deg, #F5F9FA 45%, #EAF3F3 100%);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 180px;
+    height: 180px;
+    top: -105px;
+    left: 42%;
+    border: 2px solid rgba(31, 111, 139, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .hero-content {
-    min-height: 490px;
+    min-height: calc(100svh - 76px);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.9fr 1.1fr;
     align-items: center;
-    gap: 40px;
+    gap: 48px;
 }
 
 .hero-text {
-    padding-block: 55px;
-    max-width: 560px;
+    max-width: 600px;
+    padding-block: 50px;
 }
 
 .hero-text h1 {
-    font-size: clamp(2.5rem, 5vw, 3.8rem);
     margin-bottom: 22px;
-    letter-spacing: -1.5px;
+    font-size: clamp(3rem, 5.2vw, 4.6rem);
+    letter-spacing: -2px;
 }
 
 .hero-text h1 span {
@@ -412,11 +444,11 @@ p {
 }
 
 .hero-text > p {
-    max-width: 520px;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--color-text-secondary);
+    max-width: 540px;
     margin-bottom: 28px;
+    color: var(--color-text-secondary);
+    font-size: 1.2rem;
+    line-height: 1.7;
 }
 
 .hero-text .btn {
@@ -432,8 +464,8 @@ p {
 .company-access {
     display: flex;
     align-items: center;
-    gap: 7px;
     flex-wrap: wrap;
+    gap: 7px;
     margin-top: 20px;
     font-size: 0.9rem;
 }
@@ -451,51 +483,75 @@ p {
     text-decoration: underline;
 }
 
-/* 2. ESPAÇO DA FOTOGRAFIA */
+/* Fotografia e elementos abstratos */
 .hero-image {
     position: relative;
-    min-height: 390px;
-    height: 100%;
+    isolation: isolate;
+    min-height: 580px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hero-image img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: min(72vh, 650px);
+    min-height: 430px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 150px 20px 20px 20px;
+    box-shadow: 0 18px 45px rgba(22, 58, 74, 0.12);
 }
 
 .hero-image-decoration {
     position: absolute;
-    width: 390px;
-    height: 390px;
+    z-index: 1;
+    top: 5%;
+    right: -8%;
+    width: 85%;
+    height: 85%;
     border-radius: 50%;
     background-color: var(--color-accent);
-    opacity: 0.14;
+    opacity: 0.22;
 }
 
-.hero-image-placeholder {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    min-height: 350px;
-    border-radius: 140px 18px 18px 18px;
-    background:
-        linear-gradient(135deg, #DCEBE8, #B8D4CC);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    text-align: center;
-    color: var(--color-primary);
-    font-weight: 600;
+.hero-image::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: -35px;
+    width: 130px;
+    height: 130px;
+    border: 3px solid rgba(31, 111, 139, 0.55);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
-/* 3. BENEFÍCIOS */
+/* Seção de benefícios */
 .benefits {
-    background-color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 4% 90%,
+            rgba(31, 111, 139, 0.055),
+            transparent 26%
+        ),
+        radial-gradient(
+            circle at 96% 10%,
+            rgba(33, 140, 104, 0.055),
+            transparent 25%
+        ),
+        #F5F8F9;
 }
 
 .benefits-header {
-    text-align: center;
     max-width: 700px;
     margin-inline: auto;
+    text-align: center;
 }
 
 .benefits-header p {
@@ -515,6 +571,7 @@ p {
     gap: 18px;
     min-height: 190px;
     padding: 25px 22px;
+    background-color: var(--color-white);
 }
 
 .benefit-card h3 {
@@ -527,7 +584,7 @@ p {
     line-height: 1.6;
 }
 
-/* Ícones ilustrativos */
+/* Ícones dos benefícios */
 .benefit-icon {
     flex-shrink: 0;
     width: 58px;
@@ -542,151 +599,18 @@ p {
     font-weight: 700;
 }
 
-/* 4. RESPONSIVIDADE DA PÁGINA INICIAL */
-@media (max-width: 900px) {
-
-    .hero-content {
-        grid-template-columns: 1fr 0.8fr;
-        gap: 20px;
-    }
-
-    .hero-text h1 {
-        font-size: 2.6rem;
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-}
-
-@media (max-width: 650px) {
-
-    .hero-content {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-    .hero-text {
-        padding-block: 45px 25px;
-    }
-
-    .hero-text h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-image {
-        min-height: 250px;
-        padding-bottom: 30px;
-    }
-
-    .hero-image-placeholder {
-        min-height: 230px;
-        border-radius: 70px 12px 12px 12px;
-    }
-
-    .hero-image-decoration {
-        width: 230px;
-        height: 230px;
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .benefit-card {
-        min-height: auto;
-    }
-
-}
-
-
 /* =========================================
-   HERO AMPLIADO - INCLUI+
+   14. RESPONSIVIDADE
    ========================================= */
 
-.hero-content {
-    min-height: calc(100svh - 76px);
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 48px;
-}
-
-.hero-text {
-    max-width: 600px;
-    padding-block: 50px;
-}
-
-.hero-text h1 {
-    font-size: clamp(3rem, 5.2vw, 4.6rem);
-    letter-spacing: -2px;
-}
-
-.hero-text > p {
-    font-size: 1.2rem;
-    max-width: 540px;
-}
-
-.hero-image {
-    min-height: 580px;
-    position: relative;
-    isolation: isolate;
-}
-
-.hero-image img {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: min(72vh, 650px);
-    min-height: 430px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 150px 20px 20px 20px;
-    box-shadow: 0 18px 45px rgba(22, 58, 74, 0.12);
-}
-
-.hero-image-decoration {
-    position: absolute;
-    z-index: 1;
-    width: 85%;
-    height: 85%;
-    right: -8%;
-    top: 5%;
-    border-radius: 50%;
-    background: var(--color-accent);
-    opacity: 0.22;
-}
-
-.hero-image::before {
-    content: "";
-    position: absolute;
-    z-index: 0;
-    width: 130px;
-    height: 130px;
-    border: 3px solid var(--color-secondary);
-    border-radius: 50%;
-    bottom: 0;
-    left: -35px;
-    opacity: 0.55;
-}
-
-.hero {
-    background:
-        radial-gradient(
-            circle at 8% 10%,
-            rgba(31, 111, 139, 0.09),
-            transparent 32%
-        ),
-        linear-gradient(
-            110deg,
-            #F8FAFB 45%,
-            #EAF3F3 100%
-        );
-}
-
 @media (max-width: 900px) {
     .hero-content {
-        grid-template-columns: 1fr 1fr;
-        min-height: calc(100svh - 76px);
+        grid-template-columns: 1fr 0.9fr;
+        gap: 24px;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2.6rem, 5vw, 3.5rem);
     }
 
     .hero-image {
@@ -697,17 +621,66 @@ p {
         min-height: 400px;
         height: 55vh;
     }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: min(100% - 32px, var(--container-width));
+    }
+
+    .header-content {
+        flex-wrap: wrap;
+        padding-block: 16px;
+    }
+
+    .main-nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .section {
+        padding-block: var(--spacing-lg);
+    }
 }
 
 @media (max-width: 650px) {
+    .brand-logo {
+        font-size: 1.55rem;
+    }
+
+    .brand-logo img {
+        width: 33px;
+        height: 33px;
+    }
+
     .hero-content {
         min-height: auto;
         grid-template-columns: 1fr;
         gap: 10px;
     }
 
+    .hero-text {
+        padding-block: 45px 25px;
+    }
+
     .hero-text h1 {
         font-size: 2.8rem;
+        letter-spacing: -1px;
+    }
+
+    .hero-text > p {
+        font-size: 1.05rem;
     }
 
     .hero-image {
@@ -720,4 +693,350 @@ p {
         min-height: 300px;
         border-radius: 75px 14px 14px 14px;
     }
+
+    .hero-image-decoration {
+        width: 75%;
+        height: 75%;
+        right: -2%;
+    }
+
+    .hero-image::before {
+        width: 85px;
+        height: 85px;
+        left: -12px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .benefit-card {
+        min-height: auto;
+    }
+
+    .site-footer {
+        padding-block: 24px 16px;
+    }
+
+    .footer-bottom {
+        margin-top: 16px;
+    }
 }
+
+/* =========================================
+   15. MOVIMENTOS REDUZIDOS
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+
+/* =========================================
+   AJUSTES EXCLUSIVOS PARA MOBILE
+   CABEÇALHO E RODAPÉ
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    /* CABEÇALHO */
+    .header-content {
+        min-height: 66px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 8px;
+        padding-block: 10px;
+    }
+
+    .brand-logo {
+        gap: 6px;
+        font-size: 1.3rem;
+    }
+
+    .brand-logo img {
+        width: 29px;
+        height: 29px;
+    }
+
+    .main-nav {
+        width: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .main-nav a {
+        font-size: 0.76rem;
+        white-space: nowrap;
+    }
+
+    /* RODAPÉ */
+    .site-footer {
+        padding: 24px 0 16px;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        gap: 18px 12px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-brand .brand-logo {
+        margin-bottom: 5px;
+    }
+
+    .footer-brand .brand-logo img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .footer-brand > p {
+        font-size: 0.85rem;
+    }
+
+    .footer-links {
+        gap: 6px;
+        font-size: 0.85rem;
+    }
+
+    .footer-description {
+        max-width: none;
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .footer-bottom {
+        margin-top: 16px;
+        padding-top: 12px;
+        font-size: 0.78rem;
+    }
+}
+
+/* Ajustes para celulares muito estreitos */
+
+/* =========================================
+   RESPONSIVIDADE GERAL | INCLUI+
+   Cabeçalho, conteúdo e rodapé
+   ========================================= */
+
+/* TABLETS E TELAS INTERMEDIÁRIAS */
+@media (max-width: 768px) {
+
+    /* Cabeçalho: mantém logo e links na mesma linha */
+    .header-content {
+        min-height: 68px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding-block: 10px;
+    }
+
+    .brand-logo {
+        flex-shrink: 0;
+        gap: 7px;
+        font-size: 1.5rem;
+    }
+
+    .brand-logo img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .main-nav {
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .main-nav a {
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    /* Rodapé */
+    .site-footer {
+        padding: 22px 0 15px;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        gap: 16px 14px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-brand .brand-logo {
+        margin-bottom: 5px;
+    }
+
+    .footer-brand .brand-logo img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .footer-links {
+        gap: 6px;
+        font-size: 0.85rem;
+    }
+
+    .footer-description {
+        max-width: none;
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .footer-bottom {
+        margin-top: 14px;
+        padding-top: 11px;
+        font-size: 0.8rem;
+    }
+}
+
+/* CELULARES */
+@media (max-width: 650px) {
+
+    .container {
+        width: min(100% - 32px, var(--container-width));
+    }
+
+    /* Cabeçalho compacto */
+    .header-content {
+        min-height: 62px;
+        gap: 8px;
+    }
+
+    .brand-logo {
+        font-size: 1.3rem;
+        gap: 6px;
+    }
+
+    .brand-logo img {
+        width: 29px;
+        height: 29px;
+    }
+
+    .main-nav {
+        gap: 11px;
+    }
+
+    .main-nav a {
+        font-size: 0.76rem;
+    }
+
+    /* Rodapé compacto */
+    .site-footer {
+        padding: 20px 0 14px;
+    }
+
+    .footer-content {
+        gap: 14px 12px;
+    }
+
+    .footer-brand .brand-logo img {
+        width: 31px;
+        height: 31px;
+    }
+
+    .footer-brand > p {
+        font-size: 0.85rem;
+    }
+
+    .footer-links {
+        font-size: 0.82rem;
+    }
+
+    .footer-description {
+        font-size: 0.82rem;
+    }
+
+    .footer-bottom {
+        margin-top: 13px;
+        padding-top: 10px;
+        font-size: 0.76rem;
+    }
+}
+
+/* CELULARES ESTREITOS */
+@media (max-width: 400px) {
+
+    .container {
+        width: min(100% - 24px, var(--container-width));
+    }
+
+    .header-content {
+        gap: 6px;
+    }
+
+    .brand-logo {
+        font-size: 1.15rem;
+        gap: 5px;
+    }
+
+    .brand-logo img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .main-nav {
+        gap: 8px;
+    }
+
+    .main-nav a {
+        font-size: 0.68rem;
+    }
+
+    .footer-content {
+        gap: 12px 10px;
+    }
+
+    .footer-links,
+    .footer-description {
+        font-size: 0.78rem;
+    }
+}
+
+/* TELAS MUITO ESTREITAS */
+@media (max-width: 340px) {
+
+    .brand-logo {
+        font-size: 1.05rem;
+    }
+
+    .brand-logo img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .main-nav {
+        gap: 6px;
+    }
+
+    .main-nav a {
+        font-size: 0.63rem;
+    }
+}
+

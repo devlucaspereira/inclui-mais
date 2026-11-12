@@ -6,18 +6,34 @@
 // Identifica a página atual
 const paginaAtual = document.body.dataset.page;
 
-// Cabeçalho da página inicial
+// Identificação visual da marca
+const identificacaoMarca = `
+    <a href="index.html" class="brand-logo"
+       aria-label="Inclui+ - Página inicial">
+
+        <img
+            src="assets/logos/logo-inclui-mais.png"
+            alt=""
+            aria-hidden="true"
+        >
+
+        <span>Inclui<span class="brand-plus">+</span></span>
+
+    </a>
+`;
+
+// Cabeçalho institucional
 const headerInstitucional = `
     <header class="site-header">
         <div class="container header-content">
-            <a href="index.html" class="logo" aria-label="Inclui+ - Página inicial">
-                Inclui<span>+</span>
-            </a>
+
+            ${identificacaoMarca}
 
             <nav class="main-nav" aria-label="Navegação principal">
                 <a href="quem-somos.html">Quem somos</a>
                 <a href="acessibilidade.html">Acessibilidade</a>
             </nav>
+
         </div>
     </header>
 `;
@@ -26,15 +42,15 @@ const headerInstitucional = `
 const headerCandidato = `
     <header class="site-header">
         <div class="container header-content">
-            <a href="index.html" class="logo" aria-label="Inclui+ - Página inicial">
-                Inclui<span>+</span>
-            </a>
+
+            ${identificacaoMarca}
 
             <nav class="main-nav" aria-label="Navegação principal">
                 <a href="vagas.html">Vagas</a>
                 <a href="perfil.html">Meu perfil</a>
                 <a href="acessibilidade.html">Acessibilidade</a>
             </nav>
+
         </div>
     </header>
 `;
@@ -43,15 +59,33 @@ const headerCandidato = `
 const headerEmpresa = `
     <header class="site-header">
         <div class="container header-content">
-            <a href="index.html" class="logo" aria-label="Inclui+ - Página inicial">
-                Inclui<span>+</span>
-            </a>
+
+            ${identificacaoMarca}
 
             <nav class="main-nav" aria-label="Navegação principal">
                 <a href="acessibilidade.html">Acessibilidade</a>
             </nav>
+
         </div>
     </header>
+`;
+
+// Rodapé compartilhado
+
+// Identificação visual específica para o rodapé
+const identificacaoMarcaRodape = `
+    <a href="index.html" class="brand-logo"
+       aria-label="Inclui+ - Página inicial">
+
+        <img
+            src="assets/logos/logo-inclui-mais-rodape.png"
+            alt=""
+            aria-hidden="true"
+        >
+
+        <span>Inclui<span class="brand-plus">+</span></span>
+
+    </a>
 `;
 
 // Rodapé compartilhado
@@ -61,20 +95,23 @@ const footerCompartilhado = `
 
             <div class="footer-content">
 
-                <div>
-                    <a href="index.html" class="logo">
-                        Inclui<span>+</span>
-                    </a>
+                <div class="footer-brand">
+
+                    ${identificacaoMarcaRodape}
 
                     <p>Talentos não têm barreiras.</p>
+
                 </div>
 
-                <nav class="footer-links" aria-label="Navegação do rodapé">
+                <nav class="footer-links"
+                     aria-label="Navegação do rodapé">
+
                     <a href="quem-somos.html">Quem somos</a>
                     <a href="acessibilidade.html">Acessibilidade</a>
+
                 </nav>
 
-                <div>
+                <div class="footer-description">
                     <p>
                         Conectando talentos a oportunidades
                         mais inclusivas.
@@ -91,12 +128,15 @@ const footerCompartilhado = `
     </footer>
 `;
 
+
 // Seleciona o cabeçalho conforme a página
 let headerSelecionado = headerInstitucional;
 
-if (paginaAtual === "vagas" ||
+if (
+    paginaAtual === "vagas" ||
     paginaAtual === "detalhes-vaga" ||
-    paginaAtual === "perfil") {
+    paginaAtual === "perfil"
+) {
 
     headerSelecionado = headerCandidato;
 
@@ -105,6 +145,13 @@ if (paginaAtual === "vagas" ||
     headerSelecionado = headerEmpresa;
 }
 
-// Insere cabeçalho e rodapé na página
-document.body.insertAdjacentHTML("afterbegin", headerSelecionado);
-document.body.insertAdjacentHTML("beforeend", footerCompartilhado);
+// Insere os componentes na página
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    headerSelecionado
+);
+
+document.body.insertAdjacentHTML(
+    "beforeend",
+    footerCompartilhado
+);
